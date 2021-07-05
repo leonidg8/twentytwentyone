@@ -21,7 +21,7 @@ function adjust_wp_title( $title )
   if ( empty( $title ) && ( is_home() || is_front_page() ) ) {
     $title = __( 'Custom title for home page' );
   }
-  return $title; 
+  return $title;
 }
 
 function add_custom_post_type() {
@@ -29,17 +29,54 @@ function add_custom_post_type() {
 		array(
 	            'labels' => array(
 	                'name' => __( 'Training_cpt' ),
-	                'singular_name' => __( 'Training_cpts' )
+	                'singular_name' => __( 'Training_cpts' ),
+									'description' => __('Short description of the cpt'),
+									'publicly_queryable' => true,
+									'hierarchical' => true
 	            ),
 	            'public' => true,
-	            'has_archive' => true,
-	            'rewrite' => array('slug' => 'training_day')
+							'show_in_menu' => true,
+							'menu_position' => 2,
+	            'has_archive' => true
+
 
 	        )
 	    );
 		}
 
+
+
 add_action( 'init', 'add_custom_post_type' );
+
+function wpdocs_create_book_taxonomies() {
+    // Add new taxonomy, make it hierarchical (like categories)
+    $labels = array(
+        'name'              => _x( 'Genres', 'taxonomy general name', 'textdomain' ),
+        'singular_name'     => _x( 'Genre', 'taxonomy singular name', 'textdomain' ),
+        'search_items'      => __( 'Search Genres', 'textdomain' ),
+        'all_items'         => __( 'All Genres', 'textdomain' ),
+        'parent_item'       => __( 'Parent Genre', 'textdomain' ),
+        'parent_item_colon' => __( 'Parent Genre:', 'textdomain' ),
+        'edit_item'         => __( 'Edit Genre', 'textdomain' ),
+        'update_item'       => __( 'Update Genre', 'textdomain' ),
+        'add_new_item'      => __( 'Add New Genre', 'textdomain' ),
+        'new_item_name'     => __( 'New Genre Name', 'textdomain' ),
+        'menu_name'         => __( 'Genre', 'textdomain' ),
+    );
+
+    $args = array(
+        'hierarchical'      => true,
+        'labels'            => $labels,
+        'show_ui'           => true,
+        'show_admin_column' => true,
+        'query_var'         => true,
+        'rewrite'           => array( 'slug' => 'genre' ),
+    );
+
+    register_taxonomy( 'genre', array( 'training_cpt' ), $args );
+
+    unset( $args );
+    unset( $labels );
 
 if ( version_compare( $GLOBALS['wp_version'], '5.3', '<' ) ) {
 	require get_template_directory() . '/inc/back-compat.php';
