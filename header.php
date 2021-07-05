@@ -21,9 +21,10 @@
 </head>
 
 <body <?php body_class(); ?>>
+	<?php
 	if ( is_singular() ) {
     echo "<p>We are now in a single post type</p>";
-}
+} ?>
 <?php wp_body_open(); ?>
 <div id="page" class="site">
 	<a class="skip-link screen-reader-text" href="#content"><?php esc_html_e( 'Skip to content', 'twentytwentyone' ); ?></a>

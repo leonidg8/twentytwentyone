@@ -9,7 +9,28 @@
  * @since 1.0.0
  */
 
+
+
 // This theme requires WordPress 5.3 or later.
+
+
+function add_custom_post_type() {
+		register_post_type( 'training_cpt',
+		array(
+	            'labels' => array(
+	                'name' => __( 'Training_cpt' ),
+	                'singular_name' => __( 'Training_cpts' )
+	            ),
+	            'public' => true,
+	            'has_archive' => true,
+	            'rewrite' => array('slug' => 'training_day')
+
+	        )
+	    );
+		}
+
+add_action( 'init', 'add_custom_post_type' );
+
 if ( version_compare( $GLOBALS['wp_version'], '5.3', '<' ) ) {
 	require get_template_directory() . '/inc/back-compat.php';
 }

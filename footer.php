@@ -16,6 +16,15 @@
 		</section><!-- #primary -->
 	</div><!-- #content -->
 
+	<?php
+
+
+if ( !is_front_page() && is_home() ) {
+  echo "<p>We are now in a blog page</p>";
+}
+
+
+?>
 	<?php get_template_part( 'template-parts/footer/footer-widgets' ); ?>
 
 	<footer id="colophon" class="site-footer" role="contentinfo">
