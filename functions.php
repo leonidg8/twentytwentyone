@@ -78,6 +78,14 @@ function wpdocs_create_book_taxonomies() {
     unset( $args );
     unset( $labels );
 
+		add_filter('pre_get_document_title', 'change_home_page_title');
+	function change_home_page_title($title) {
+			if (is_home()) {
+					return 'My Custom Title';
+			}
+			return $title;
+	}
+
 if ( version_compare( $GLOBALS['wp_version'], '5.3', '<' ) ) {
 	require get_template_directory() . '/inc/back-compat.php';
 }
