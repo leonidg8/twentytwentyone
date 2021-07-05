@@ -18,13 +18,7 @@
 	<meta charset="<?php bloginfo( 'charset' ); ?>" />
 	<meta name="viewport" content="width=device-width, initial-scale=1" />
 	<?php wp_head(); ?>
-	<title><?php
-
-	if (is_home()) {
-	wp_title('Custom Title for home page');
-
-	}
-?></title>
+	
 </head>
 
 <body <?php body_class(); ?>>
