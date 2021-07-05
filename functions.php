@@ -13,6 +13,16 @@
 
 // This theme requires WordPress 5.3 or later.
 
+add_filter( 'wp_title', 'adjust_wp_title' );
+
+
+function adjust_wp_title( $title )
+{
+  if ( empty( $title ) && ( is_home() || is_front_page() ) ) {
+    $title = __( 'Custom title for home page' );
+  }
+  return $title; 
+}
 
 function add_custom_post_type() {
 		register_post_type( 'training_cpt',

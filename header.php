@@ -18,13 +18,27 @@
 	<meta charset="<?php bloginfo( 'charset' ); ?>" />
 	<meta name="viewport" content="width=device-width, initial-scale=1" />
 	<?php wp_head(); ?>
+	<title><?php
+
+	if (is_home()) {
+	wp_title('Custom Title for home page');
+
+	}
+?></title>
 </head>
 
 <body <?php body_class(); ?>>
 	<?php
-	if ( is_singular() ) {
+	if ( is_singular('post') ) {
     echo "<p>We are now in a single post type</p>";
-} ?>
+
+	}
+
+
+if( is_category() ){
+	echo "<p>We are now in a category page</p>";
+}
+?>
 <?php wp_body_open(); ?>
 <div id="page" class="site">
 	<a class="skip-link screen-reader-text" href="#content"><?php esc_html_e( 'Skip to content', 'twentytwentyone' ); ?></a>
